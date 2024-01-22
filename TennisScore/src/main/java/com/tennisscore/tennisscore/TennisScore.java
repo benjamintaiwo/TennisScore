@@ -27,53 +27,33 @@ public class TennisScore {
 
         if (playerAScore == 4 && playerBScore == 3) {
             playerAHasAdvantage = true;
-            
+            System.out.println("Advantage: Player A");
         } else if (playerAScore == 3 && playerBScore == 4) {
             playerBHasAdvantage = true;
-        } else if (playerAScore == 4 && playerBScore <= 2) {
+            System.out.println("Advantage: Player B");
+        } else if (playerAScore >= 4 && playerBScore < 3) {
             printWinner("Player A");
             
-        } else if (playerBScore == 4 && playerAScore <= 2) {
+        } else if (playerBScore >= 4 && playerAScore <3) {
             printWinner("Player B");
-        } else if (playerAScore > 3 && playerBScore > 3  && playerAScore == playerBScore) {
-            System.out.println("Deuce");
-           // handleDeuce();
+        } else if (playerAScore >= 3 && playerBScore >= 3  && playerAScore == playerBScore) {
+           System.out.println("Deuce");
+           
            
         } else {
             printScore();
-            //System.out.println("Player A: " + mapScore(playerAScore) + " / Player B: " + mapScore(playerBScore));
+            
         }
     }
 
-    //return the players to zero after a win
-    public static void refreshPlayers() {
-        playerAScore = 0;
-        playerBScore = 0;
-        playerAHasAdvantage = false;
-        playerBHasAdvantage = false;
-    }
-
+    
     public static void printWinner(String winner) {
         System.out.println("Game Over. " + winner + " wins!");
         System.exit(0);
         
     }
 
-    public static void handleDeuce() {
-
-        if (playerAScore >= 3 && playerBScore >= 3) {
-            if (playerAHasAdvantage) {
-                //printWinner("Player A");
-                 System.out.println("Advantage: Player A");
-                 playerAScore++;
-            } else if (playerBHasAdvantage) {
-               System.out.println("Advantage: Player B");
-                playerBScore++;
-            } else {
-                System.out.println("Deuce");
-            }
-        }
-    }
+    
 
      public static int calculateDifference(int a, int b) {
         return Math.abs(a - b);  
