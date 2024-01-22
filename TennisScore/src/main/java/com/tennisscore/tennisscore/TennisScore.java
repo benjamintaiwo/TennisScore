@@ -30,10 +30,10 @@ public class TennisScore {
             
         } else if (playerAScore == 3 && playerBScore == 4) {
             playerBHasAdvantage = true;
-        } else if (playerAScore == 3 && playerBScore <= 2) {
+        } else if (playerAScore == 4 && playerBScore <= 2) {
             printWinner("Player A");
             
-        } else if (playerBScore == 3 && playerAScore <= 2) {
+        } else if (playerBScore == 4 && playerAScore <= 2) {
             printWinner("Player B");
         } else if (playerAScore > 3 && playerBScore > 3  && playerAScore == playerBScore) {
             System.out.println("Deuce");
