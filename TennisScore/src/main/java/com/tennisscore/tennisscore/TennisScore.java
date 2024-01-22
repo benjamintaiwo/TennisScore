@@ -1,4 +1,4 @@
-
+package com.tennisscore.tennisscore;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,14 +27,18 @@ public class TennisScore {
 
         if (playerAScore == 4 && playerBScore == 3) {
             playerAHasAdvantage = true;
+            
         } else if (playerAScore == 3 && playerBScore == 4) {
             playerBHasAdvantage = true;
-        } else if (playerAScore == 4 && playerBScore <= 2) {
+        } else if (playerAScore == 3 && playerBScore <= 2) {
             printWinner("Player A");
-        } else if (playerBScore == 4 && playerAScore <= 2) {
+            
+        } else if (playerBScore == 3 && playerAScore <= 2) {
             printWinner("Player B");
-        } else if (playerAScore == 4 && playerBScore == 4) {
-            handleDeuce();
+        } else if (playerAScore > 3 && playerBScore > 3  && playerAScore == playerBScore) {
+            System.out.println("Deuce");
+           // handleDeuce();
+           
         } else {
             printScore();
             //System.out.println("Player A: " + mapScore(playerAScore) + " / Player B: " + mapScore(playerBScore));
@@ -51,26 +55,41 @@ public class TennisScore {
 
     public static void printWinner(String winner) {
         System.out.println("Game Over. " + winner + " wins!");
-        refreshPlayers();
+        System.exit(0);
+        
     }
 
     public static void handleDeuce() {
 
-        if (playerAHasAdvantage) {
-            printWinner("Player A");
-        } else if (playerBHasAdvantage) {
-            printWinner("Player B");
-        } else {
-            System.out.println("Deuce");
+        if (playerAScore >= 3 && playerBScore >= 3) {
+            if (playerAHasAdvantage) {
+                //printWinner("Player A");
+                 System.out.println("Advantage: Player A");
+                 playerAScore++;
+            } else if (playerBHasAdvantage) {
+               System.out.println("Advantage: Player B");
+                playerBScore++;
+            } else {
+                System.out.println("Deuce");
+            }
         }
+    }
+
+     public static int calculateDifference(int a, int b) {
+        return Math.abs(a - b);  
     }
 
     public static void printScore() {
 
-        if (playerAHasAdvantage) {
+        if (playerAHasAdvantage && calculateDifference(playerAScore, playerBScore)> 1) {
+            printWinner("Player A");
+            } else if (playerAHasAdvantage) {
             System.out.println("Advantage: Player A");
+        } else if (playerBHasAdvantage && calculateDifference(playerAScore, playerBScore)> 1) {
+            printWinner("Player B");
         } else if (playerBHasAdvantage) {
             System.out.println("Advantage: Player B");
+        
         } else {
             System.out.println("Player A: " + mapScore(playerAScore)  +
                     " / Player B: " + mapScore(playerBScore));
@@ -105,9 +124,6 @@ public class TennisScore {
         players.chars().forEach(player -> playTennis((char) player));
     }
 
-    public static void main(String[] args) {
-        // Test the inputs
-        scorePlayers("ABABABAA");
-    }
+  
 
 }
